@@ -11,7 +11,7 @@ import unittest
 import os
 from crunchbase import Crunchbase
 
-TEST_API_KEY = 'dr66y8dsr72hct67pmd6xqqf'
+TEST_API_KEY = '8fa4acddmg2pd4d7srh843y7'
 
 class TestCrunchbase(unittest.TestCase):
     

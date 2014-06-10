@@ -18,7 +18,7 @@ class Crunchbase(object):
 
     API_BASE_URL = 'http://api.crunchbase.com'
     ENTITIES = ['company', 'person', 'financial-organization',
-                'product', 'service-provider']
+                'product', 'service-provider', 'companies', 'people', 'financial-organizations', 'service-providers']
                      
     def __init__(self, api_key='', api_version=1):
         self.api_key = api_key
@@ -34,7 +34,9 @@ class Crunchbase(object):
         if entity not in self.ENTITIES:
             entity = 'search'
         endpoint = '%s/%s' % (entity, name) if name else entity
-        return "%s/v/%s/%s.js" % (self.API_BASE_URL, self.version, endpoint)
+        url = "%s/v/%s/%s.js" % (self.API_BASE_URL, self.version, endpoint)
+        print "requesting url: %s" % url
+        return url
 
     def get(self, entity=None, name=None, **data):
         """Performs a GET HTTP request to crunchbase for a resource.
@@ -48,7 +50,7 @@ class Crunchbase(object):
         """
         data.update({'api_key': self.api_key})
         url = self.uri(entity=entity, name=name)
-        r = requests.get(url, data=data)
+        r = requests.get(url, params=data)
         try:
             return r.json()
         except ValueError:
@@ -62,11 +64,11 @@ class Crunchbase(object):
         return self.cb.get(self.entity, name, **data)
 
     @property
-    def companies():
+    def companies(self):
         return self.get('companies')
 
     @property
-    def people():
+    def people(self):
         return self.get('people')
 
     @property
@@ -74,11 +76,11 @@ class Crunchbase(object):
         return self.get('financial-organizations')
 
     @property
-    def service_providers():
+    def service_providers(self):
         return self.get('service-providers')
 
     @property
-    def products():
+    def products(self):
         return self.get('products')
 
     @property
