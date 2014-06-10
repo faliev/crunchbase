@@ -18,7 +18,7 @@ class Crunchbase(object):
 
     API_BASE_URL = 'http://api.crunchbase.com'
     ENTITIES = ['company', 'person', 'financial-organization',
-                'product', 'service-provider', 'companies', 'people']
+                'product', 'service-provider']
                      
     def __init__(self, api_key='', api_version=1):
         self.api_key = api_key
@@ -31,8 +31,8 @@ class Crunchbase(object):
             setattr(self, e.replace('-', '_'), partial(self.get, e))
 
     def uri(self, entity=None, name=None):
-        if entity not in self.ENTITIES:
-            entity = 'search'
+        # if entity not in self.ENTITIES:
+        #     entity = 'search'
         endpoint = '%s/%s' % (entity, name) if name else entity
         url = "%s/v/%s/%s.js" % (self.API_BASE_URL, self.version, endpoint)
         print "requesting url: %s" % url
