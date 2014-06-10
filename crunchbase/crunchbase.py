@@ -18,7 +18,7 @@ class Crunchbase(object):
 
     API_BASE_URL = 'http://api.crunchbase.com'
     ENTITIES = ['company', 'person', 'financial-organization',
-                'product', 'service-provider', 'companies', 'people', 'financial-organizations', 'service-providers']
+                'product', 'service-provider', 'companies', 'people']
                      
     def __init__(self, api_key='', api_version=1):
         self.api_key = api_key
